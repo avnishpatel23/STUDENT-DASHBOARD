@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .calendar-container {
+      width: 80%;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar-header {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-gap: 5px;
+      text-align: center;
+    }
+
+    .calendar .day {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .calendar .day:hover {
+      background-color: #ddd;
+    }
+
+    .calendar .day.current-day {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    .calendar .day.disabled {
+      color: #ccc;
+    }
+
+    .calendar .header-day {
+      font-weight: bold;
+    }
+
+    .calendar-nav {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .calendar-nav button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .calendar-nav button:disabled {
+      background-color: #ddd;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calendar-container">
+    <div class="calendar-header" id="calendarHeader">November 2024</div>
+    
+    <div class="calendar">
+      <div class="day header-day">Sun</div>
+      <div class="day header-day">Mon</div>
+      <div class="day header-day">Tue</div>
+      <div class="day header-day">Wed</div>
+      <div class="day header-day">Thu</div>
+      <div class="day header-day">Fri</div>
+      <div class="day header-day">Sat</div>
+      <!-- Calendar days will be inserted here dynamically -->
+    </div>
+
+    <div class="calendar-nav">
+      <button id="prevMonthBtn">Previous</button>
+      <button id="nextMonthBtn">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const calendarHeader = document.getElementById('calendarHeader');
+    const prevMonthBtn = document.getElementById('prevMonthBtn');
+    const nextMonthBtn = document.getElementById('nextMonthBtn');
+    const calendar = document.querySelector('.calendar');
+
+    let currentDate = new Date();
+
+    function renderCalendar(date) {
+      const currentMonth = date.getMonth();
+      const currentYear = date.getFullYear();
+
+      // Set calendar header
+      calendarHeader.innerHTML = `${date.toLocaleString('default', { month: 'long' })} ${currentYear}`;
+
+      // Clear previous calendar days
+      calendar.querySelectorAll('.day:not(.header-day)').forEach(day => day.remove());
+
+      // Get the first day of the month and the number of days in the month
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const firstDayOfWeek = firstDay.getDay();
+      const lastDate = lastDay.getDate();
+
+      // Add empty cells before the first day
+      for (let i = 0; i < firstDayOfWeek; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.classList.add('day', 'disabled');
+        calendar.appendChild(emptyCell);
+      }
+
+      // Add the days of the month
+      for (let i = 1; i <= lastDate; i++) {
+        const dayCell = document.createElement('div');
+        dayCell.classList.add('day');
+        dayCell.textContent = i;
+
+        // Highlight current day
+        if (i === currentDate.getDate() && currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear()) {
+          dayCell.classList.add('current-day');
+        }
+
+        calendar.appendChild(dayCell);
+      }
+    }
+
+    function goToPrevMonth() {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar(currentDate);
+    }
+
+    function goToNextMonth() {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar(currentDate);
+    }
+
+    // Initial render
+    renderCalendar(currentDate);
+
+    prevMonthBtn.addEventListener('click', goToPrevMonth);
+    nextMonthBtn.addEventListener('click', goToNextMonth);
+  </script>
+
+</body>
+</html>

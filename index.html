@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js"></script>
+</head>
+<body>
+  <header>Student Dashboard</header>
+
+  <!-- Profile Section -->
+  <div class="profile-info">
+    <img src="profile photo.png" alt="Student Photo" class="profile-pic">
+    <h2>Avnish Patel</h2>
+    <div class="batch-selector">
+      Batch: 
+      <select id="batchDropdown" onchange="updateBatch()">
+        <option value="2021-2022">2021-2022</option>
+        <option value="2022-2023">2022-2023</option>
+        <option value="2023-2024">2023-2024</option>
+        <option value="2024-2025" selected>2024-2025</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Dashboard Sections -->
+  <main class="main-container" id="dashboardContent">
+    <a href="My Profile.html" class="grid-item">
+      <i class="fas fa-user"></i>
+      <p>My Profile</p>
+    </a>
+    <a href="change-pass.html" class="grid-item">
+      <i class="fas fa-key"></i>
+      <p>Change Password</p>
+    </a>
+    <a href="Notifications.html" class="grid-item">
+      <i class="fas fa-bell"></i>
+      <p>Notifications</p>
+    </a>
+    <a href="AdmitCard.html" class="grid-item">
+      <i class="fas fa-id-card"></i>
+      <p>Admit Card</p>
+    </a>
+    <a href="Attendence.html" class="grid-item">
+      <i class="fas fa-calendar-check"></i>
+      <p>Attendance</p>
+    </a>
+    <a href="Assignments.html" class="grid-item">
+      <i class="fas fa-book"></i>
+      <p>Assignment</p>
+    </a>
+    <a href="fees.html" class="grid-item">
+      <i class="fas fa-wallet"></i>
+      <p>View Fees</p>
+    </a>
+    <a href="Exam.html" class="grid-item">
+      <i class="fas fa-edit"></i>
+      <p>Exam</p>
+    </a>
+    <a href="result.html" class="grid-item">
+      <i class="fas fa-chart-bar"></i>
+      <p>Results</p>
+    </a>
+    <a href="syllabus.html" class="grid-item">
+      <i class="fas fa-file"></i>
+      <p>Syllabus</p>
+    </a>
+    <a href="TimeTable.html" class="grid-item">
+      <i class="fas fa-clock"></i>
+      <p>Time Table</p>
+    </a>
+    <a href="ImageGallery.html" class="grid-item">
+      <i class="fas fa-image"></i>
+      <p>Image Gallery</p>
+    </a>
+    <a href="faculty.html" class="grid-item">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <p>Faculty</p>
+    </a>
+    <a href="calendar.html" class="grid-item">
+      <i class="fas fa-calendar"></i>
+      <p>Calendar</p>
+    </a>
+    <a href="MyClassmate.html" class="grid-item">
+      <i class="fas fa-users"></i>
+      <p>My Classmate</p>
+    </a>
+    <a href="Notice.html" class="grid-item">
+      <i class="fas fa-poll"></i>
+      <p>Notice</p>
+    </a>
+    <a href="Feedback.html" class="grid-item">
+      <i class="fas fa-comments"></i>
+      <p>Feedback for Teacher</p>
+    </a>
+  </main>
+
+  <footer>© 2024 Avnish Patel | All Rights Reserved</footer>
+
+  
+</body>
+</html>

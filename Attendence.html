@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background: #1e90ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .attendance-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .attendance-header h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    .attendance-table th {
+      background-color: #1e90ff;
+      color: white;
+    }
+
+    .attendance-summary {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1e90ff;
+      color: white;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>Attendance Details</header>
+
+  <!-- Content Section -->
+  <div class="content-container">
+    <div class="attendance-header">
+      <h2>Attendance for Avnish Patel</h2>
+      <p>Batch: 2024-2025</p>
+    </div>
+
+    <!-- Attendance Table -->
+    <table class="attendance-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Total Classes</th>
+          <th>Classes Attended</th>
+          <th>Attendance Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Algorithms</td>
+          <td>30</td>
+          <td>28</td>
+          <td>93.33%</td>
+        </tr>
+        <tr>
+          <td>Data Structures</td>
+          <td>35</td>
+          <td>32</td>
+          <td>91.43%</td>
+        </tr>
+        <tr>
+          <td>Operating Systems</td>
+          <td>32</td>
+          <td>30</td>
+          <td>93.75%</td>
+        </tr>
+        <tr>
+          <td>DBMS</td>
+          <td>28</td>
+          <td>26</td>
+          <td>92.86%</td>
+        </tr>
+        <tr>
+          <td>Digital Logic</td>
+          <td>30</td>
+          <td>29</td>
+          <td>96.67%</td>
+        </tr>
+        <tr>
+          <td>COA</td>
+          <td>28</td>
+          <td>27</td>
+          <td>96.43%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Attendance Summary -->
+    <div class="attendance-summary">
+      <p><strong>Total Classes: 183</strong></p>
+      <p><strong>Classes Attended: 172</strong></p>
+      <p><strong>Overall Attendance: 93.91%</strong></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>© 2024 Avnish Patel | All Rights Reserved</footer>
+
+</body>
+</html>

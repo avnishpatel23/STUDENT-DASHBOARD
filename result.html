@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .header {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      margin: 20px auto;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #1e90ff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .footer {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .total-summary {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Student Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <!-- Result Section -->
+    <section class="section">
+      <h2>Result</h2>
+      <div>
+        <label for="exam-selection">Select Exam Type:</label>
+        <select id="exam-selection">
+          <option value="sessional1">Sessional 1</option>
+          <option value="sessional2">Sessional 2</option>
+          <option value="mock">Mock Exam</option>
+        </select>
+      </div>
+
+      <div id="result-table" style="margin-top: 20px;">
+        <!-- Default table content -->
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Subject</th>
+              <th>Marks Obtained</th>
+              <th>Total Marks</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Algorithms</td>
+              <td>25</td>
+              <td>30</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Data Structures</td>
+              <td>24</td>
+              <td>30</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Operating Systems</td>
+              <td>22</td>
+              <td>30</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>DBMS</td>
+              <td>27</td>
+              <td>30</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Digital Logic</td>
+              <td>21</td>
+              <td>30</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>COA</td>
+              <td>23</td>
+              <td>30</td>
+              <td>B</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="total-summary" id="total-summary">
+          Total Marks Obtained: 142 / 180 &nbsp; | &nbsp; Percentage: 78.89%
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 BNCET | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // JavaScript for handling the exam type selection and calculating total marks & percentage
+    const examSelection = document.getElementById("exam-selection");
+    const resultTable = document.getElementById("result-table");
+    const totalSummary = document.getElementById("total-summary");
+
+    const results = {
+      sessional1: [
+        { subject: "Algorithms", marks: 25, total: 30, grade: "A" },
+        { subject: "Data Structures", marks: 24, total: 30, grade: "A" },
+        { subject: "Operating Systems", marks: 22, total: 30, grade: "B" },
+        { subject: "DBMS", marks: 27, total: 30, grade: "A" },
+        { subject: "Digital Logic", marks: 21, total: 30, grade: "B" },
+        { subject: "COA", marks: 23, total: 30, grade: "B" },
+      ],
+      sessional2: [
+        { subject: "Algorithms", marks: 27, total: 30, grade: "A+" },
+        { subject: "Data Structures", marks: 25, total: 30, grade: "A" },
+        { subject: "Operating Systems", marks: 26, total: 30, grade: "A" },
+        { subject: "DBMS", marks: 29, total: 30, grade: "A+" },
+        { subject: "Digital Logic", marks: 24, total: 30, grade: "A" },
+        { subject: "COA", marks: 22, total: 30, grade: "B" },
+      ],
+      mock: [
+        { subject: "Algorithms", marks: 90, total: 100, grade: "A+" },
+        { subject: "Data Structures", marks: 84, total: 100, grade: "A" },
+        { subject: "Operating Systems", marks: 79, total: 100, grade: "B+" },
+        { subject: "DBMS", marks: 91, total: 100, grade: "A+" },
+        { subject: "Digital Logic", marks: 72, total: 100, grade: "B" },
+        { subject: "COA", marks: 85, total: 100, grade: "A" },
+      ],
+    };
+
+    examSelection.addEventListener("change", function () {
+      const selectedExam = examSelection.value;
+      const selectedResults = results[selectedExam];
+      
+      let totalObtained = 0;
+      let totalMarks = 0;
+
+      let tableContent = selectedResults.map((result, index) => {
+        totalObtained += result.marks;
+        totalMarks += result.total;
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${result.subject}</td>
+            <td>${result.marks}</td>
+            <td>${result.total}</td>
+            <td>${result.grade}</td>
+          </tr>
+        `;
+      }).join("");
+
+      resultTable.querySelector("tbody").innerHTML = tableContent;
+
+      const percentage = ((totalObtained / totalMarks) * 100).toFixed(2);
+      totalSummary.textContent = `Total Marks Obtained: ${totalObtained} / ${totalMarks} | Percentage: ${percentage}%`;
+    });
+  </script>
+</body>
+</html>

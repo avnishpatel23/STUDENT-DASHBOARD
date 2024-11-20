@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admit Card</title>
+  <style>
+    /* Add your previous CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .header {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .admit-card {
+      background: white;
+      width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-section {
+      text-align: center;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .student-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .student-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      border: 2px solid #1e90ff;
+    }
+
+    .student-info table {
+      width: calc(100% - 140px); /* Adjust for photo */
+      border-collapse: collapse;
+    }
+
+    .student-info td {
+      padding: 5px 0;
+    }
+
+    .exam-schedule h3 {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .exam-schedule table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .exam-schedule th, .exam-schedule td {
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .footer {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .signatures {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #ccc;
+    }
+
+    .signatures .signature {
+      text-align: center;
+      width: 45%;
+    }
+
+    .signature hr {
+      margin-top: 50px;
+      width: 80%;
+    }
+
+    .signature p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .admit-card-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1e90ff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .dropdown-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-container select {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .action-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .action-buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .action-buttons button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Admit Card</h1>
+  </header>
+
+  <!-- Dropdown to select the exam -->
+  <div class="dropdown-container">
+    <select id="exam-select" onchange="updateAdmitCard()">
+      <option value="">Select Exam</option>
+      <option value="session1">1st Sessional</option>
+      <option value="session2">2nd Sessional</option>
+      <option value="mock">Mock Exam</option>
+    </select>
+  </div>
+
+  <section class="card-container">
+    <div class="admit-card" id="admit-card">
+      <!-- Admit Card Content will be dynamically generated here -->
+    </div>
+  </section>
+
+  <div class="action-buttons">
+    <button onclick="printAdmitCard()">Print Admit Card</button>
+    <button onclick="downloadAsPDF()">Download as PDF</button>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 BNCET | All Rights Reserved</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    // Exam schedules for sessional and mock exams
+    const examSchedules = {
+      session1: [
+        { subject: 'Algorithms', date: '01-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'Data Structures', date: '01-12-2023', time: '2:00 PM - 5:00 PM' },
+        { subject: 'Operating Systems', date: '02-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'DBMS', date: '02-12-2023', time: '2:00 PM - 5:00 PM' },
+        { subject: 'Digital Logic', date: '03-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'COA', date: '03-12-2023', time: '2:00 PM - 5:00 PM' }
+      ],
+      session2: [
+        { subject: 'Algorithms', date: '04-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'Data Structures', date: '04-12-2023', time: '2:00 PM - 5:00 PM' },
+        { subject: 'Operating Systems', date: '05-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'DBMS', date: '05-12-2023', time: '2:00 PM - 5:00 PM' },
+        { subject: 'Digital Logic', date: '06-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'COA', date: '06-12-2023', time: '2:00 PM - 5:00 PM' }
+      ],
+      mock: [
+        { subject: 'Algorithms', date: '07-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'Data Structures', date: '08-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'Operating Systems', date: '09-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'DBMS', date: '10-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'Digital Logic', date: '11-12-2023', time: '10:00 AM - 1:00 PM' },
+        { subject: 'COA', date: '12-12-2023', time: '10:00 AM - 1:00 PM' }
+      ]
+    };
+
+    // Function to update the admit card based on selected exam
+    function updateAdmitCard() {
+      const examSelect = document.getElementById('exam-select');
+      const admitCardContainer = document.getElementById('admit-card');
+      const selectedExam = examSelect.value;
+
+      // Clear existing admit card content
+      admitCardContainer.innerHTML = '';
+
+      if (!selectedExam) return;
+
+      // Create admit card with photo section
+      const admitCardHTML = `
+        <div class="admit-card-title">
+          <h2>Admit Card</h2>
+        </div>
+        <div class="header-section">
+          <h2>B.N. COLLEGE OF ENGINEERING & TECHNOLOGY, LUCKNOW</h2>
+          <p><strong>Examination:</strong> End Semester Exams 2024-2025</p>
+        </div>
+        <div class="student-info">
+          <table>
+            <tr>
+              <td><strong>Name:</strong></td>
+              <td>Avnish Patel</td>
+            </tr>
+            <tr>
+              <td><strong>Roll Number:</strong></td>
+              <td>2104310100023</td>
+            </tr>
+            <tr>
+              <td><strong>Course:</strong></td>
+              <td>B.Tech (CSE)</td>
+            </tr>
+            <tr>
+              <td><strong>Batch:</strong></td>
+              <td>2024-2025</td>
+            </tr>
+          </table>
+          <img src="profile photo.png" alt="Student Photo" class="student-photo">
+        </div>
+        <div class="exam-schedule">
+          <h3>Exam Schedule</h3>
+          <table>
+            <tr>
+              <th>Subject</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+            ${generateExamSchedule(examSchedules[selectedExam])}
+          </table>
+        </div>
+        <div class="signatures">
+          <div class="signature">
+            <hr>
+            <p>Examination Controller</p>
+          </div>
+          <div class="signature">
+            <hr>
+            <p>HOD</p>
+          </div>
+        </div>
+      `;
+
+      admitCardContainer.innerHTML = admitCardHTML;
+    }
+
+    // Function to generate the exam schedule rows dynamically
+    function generateExamSchedule(schedule) {
+      return schedule.map(exam => `
+        <tr>
+          <td>${exam.subject}</td>
+          <td>${exam.date}</td>
+          <td>${exam.time}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Function to print the admit card
+    function printAdmitCard() {
+      const printWindow = window.open('', '', 'height=800,width=800');
+      printWindow.document.write('<html><head><title>Print Admit Card</title>');
+      printWindow.document.write('<link rel="stylesheet" href="' + window.location.href + '" />');
+      printWindow.document.write('</head><body>');
+      printWindow.document.write(document.getElementById('admit-card').innerHTML);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    }
+
+    // Function to download admit card as PDF
+    function downloadAsPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const admitCard = document.getElementById('admit-card');
+
+      doc.html(admitCard, {
+        margin: [10, 10, 10, 10], // Set margin for top, left, right, bottom
+        callback: function (doc) {
+          doc.save('admit-card.pdf');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

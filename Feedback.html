@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Instructor Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .feedback-container {
+      width: 70%;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feedback-header {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feedback-form label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .feedback-form input, .feedback-form select, .feedback-form textarea {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .feedback-form .rating-group input {
+      margin-right: 10px;
+    }
+
+    .feedback-form .rating-group label {
+      margin-right: 15px;
+    }
+
+    .feedback-form button {
+      background-color: #1e90ff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .feedback-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .feedback-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="feedback-container">
+    <div class="feedback-header">
+      Course Instructor Feedback
+    </div>
+
+    <p>Please fill out the form with honesty.</p>
+
+    <form class="feedback-form">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+      <label for="studentID">Roll No (e.g., 23):</label>
+      <input type="text" id="studentID" name="studentID" placeholder="Enter your student ID" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="example@example.com" required>
+
+      <label for="courseName">Branch Name:</label>
+      <input type="text" id="courseName" name="courseName" placeholder="Enter branch name" required>
+
+      <label for="instructorName">Faculty Name:</label>
+      <input type="text" id="instructorName" name="instructorName" placeholder="Enter instructor's full name" required>
+
+
+      <label><b>Faculty Feedback</b></label>
+      <div class="rating-group">
+        <label>(i) I received syllabus & course description:</label>
+        <input type="radio" name="syllabus" value="disagree"> Disagree
+        <input type="radio" name="syllabus" value="neutral"> Neutral
+        <input type="radio" name="syllabus" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(ii) Course objectives stated clearly:</label>
+        <input type="radio" name="objectives" value="disagree"> Disagree
+        <input type="radio" name="objectives" value="neutral"> Neutral
+        <input type="radio" name="objectives" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(iii) Material presented in class matches syllabus:</label>
+        <input type="radio" name="material" value="disagree"> Disagree
+        <input type="radio" name="material" value="neutral"> Neutral
+        <input type="radio" name="material" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(iv) Instructor shows adequate knowledge of course:</label>
+        <input type="radio" name="knowledge" value="disagree"> Disagree
+        <input type="radio" name="knowledge" value="neutral"> Neutral
+        <input type="radio" name="knowledge" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(v) Class time is used efficiently:</label>
+        <input type="radio" name="classTime" value="disagree"> Disagree
+        <input type="radio" name="classTime" value="neutral"> Neutral
+        <input type="radio" name="classTime" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(vi) The instructor is well prepared:</label>
+        <input type="radio" name="preparedness" value="disagree"> Disagree
+        <input type="radio" name="preparedness" value="neutral"> Neutral
+        <input type="radio" name="preparedness" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(vii) This class was very informative:</label>
+        <input type="radio" name="informative" value="disagree"> Disagree
+        <input type="radio" name="informative" value="neutral"> Neutral
+        <input type="radio" name="informative" value="agree"> Agree
+      </div>
+
+      <div class="rating-group">
+        <label>(viii) I would recommend the class to a friend:</label>
+        <input type="radio" name="recommend" value="disagree"> Disagree
+        <input type="radio" name="recommend" value="neutral"> Neutral
+        <input type="radio" name="recommend" value="agree"> Agree
+      </div>
+
+      <label>(ix) How satisfied are you with the overall quality of this course?</label>
+      <select name="satisfaction" required>
+        <option value="1">1 - Very Dissatisfied</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 - Very Satisfied</option>
+      </select>
+
+      <label for="additionalComments">Additional Comments:</label>
+      <textarea id="additionalComments" name="additionalComments" rows="4" placeholder="Enter your comments or suggestions here"></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div class="feedback-footer">
+      Thank you for providing your valuable feedback!
+    </div>
+  </div>
+
+</body>
+</html>

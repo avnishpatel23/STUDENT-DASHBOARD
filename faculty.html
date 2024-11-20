@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Faculty Section</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .faculty-container {
+      width: 80%;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faculty-header {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .faculty-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #fafafa;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .faculty-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .faculty-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .faculty-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .faculty-info h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .faculty-info p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .faculty-info .contact {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="faculty-container">
+    <div class="faculty-header">Faculty Members</div>
+    <div class="faculty-grid">
+     <!-- Faculty Card 1: HOD -->
+      <div class="faculty-card">
+        <img src="vinay.jpeg" alt="Vinay Kumar">
+        <div class="faculty-info">
+          <h3>Mr. Vinay Kumar</h3>
+          <p>Head of Department (CSE)</p>
+          <p class="contact">Email: vinay.kumar@institution.com</p>
+        </div>
+      </div>
+      <!-- Faculty Card 2: Class Coordinator -->
+      <div class="faculty-card">
+        <img src="path/to/dakshita.jpg" alt="Dakshita Joshi">
+        <div class="faculty-info">
+          <h3>Ms. Dakshita Joshi</h3>
+          <p>Class Coordinator</p>
+          <p class="contact">Email: dakshita.joshi@institution.com</p>
+        </div>
+      </div>
+      <!-- Faculty Card 3: Project Manager -->
+      <div class="faculty-card">
+        <img src="path/to/devendrakumar.jpg" alt="Devendra Kumar">
+        <div class="faculty-info">
+          <h3>Mr. Devendra Kumar</h3>
+          <p>Project Manager</p>
+          <p class="contact">Email: devendra.kumar@institution.com</p>
+        </div>
+      </div>
+      <!-- Faculty Card 4: Example Faculty -->
+      <div class="faculty-card">
+        <img src="path/to/faculty4.jpg" alt="Dr. Kaneez Zainab">
+        <div class="faculty-info">
+          <h3>Dr. Kaneez Zainab</h3>
+          <p>Internet of Things</p>
+          <p class="contact">Email: kanz@institution.com</p>
+        </div>
+      </div>
+      <!-- Faculty Card 5: Dr. A.K. Singh -->
+      <div class="faculty-card">
+        <img src="path/to/aksingh.jpg" alt="Dr. A.K. Singh">
+        <div class="faculty-info">
+          <h3>Dr. A.K. Singh</h3>
+          <p>Project Management & Entrepreneurship</p>
+          <p class="contact">Email: ak.singh@institution.com</p>
+        </div>
+      </div>
+      <!-- Faculty Card 6: Mr. Asim Jameel -->
+      <div class="faculty-card">
+        <img src="path/to/asimjameel.jpg" alt="Mr. Asim Jameel">
+        <div class="faculty-info">
+          <h3>Mr. Asim Jameel</h3>
+          <p>Renewable Energy Resources</p>
+          <p class="contact">Email: asim.jameel@institution.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2024 Your Institution Name
+  </div>
+
+</body>
+</html>

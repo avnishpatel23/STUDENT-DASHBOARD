@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Schedule</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background: #1e90ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .exam-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .exam-header h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .dropdown-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-container select {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .exam-schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .exam-schedule-table th, .exam-schedule-table td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .exam-schedule-table th {
+      background-color: #1e90ff;
+      color: white;
+    }
+
+    .exam-footer {
+      text-align: center;
+      padding: 20px;
+      background: #1e90ff;
+      color: white;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Exam Schedule</header>
+
+  <div class="content-container">
+    <div class="exam-header">
+      <h2>End Semester Exams 2024-2025</h2>
+      <p>Select the type of session from the dropdown to view the exam schedule:</p>
+    </div>
+
+    <!-- Dropdown to select session -->
+    <div class="dropdown-container">
+      <select id="session-select" onchange="updateSchedule()">
+        <option value="">Select Exam</option>
+        <option value="session1">1st Sessional</option>
+        <option value="session2">2nd Sessional</option>
+        <option value="mock">Mock Exam</option>
+      </select>
+    </div>
+
+    <!-- Exam schedule table -->
+    <table class="exam-schedule-table" id="exam-schedule">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>DATE/DAY</th>
+          <th>Timings</th>
+          <th>Subject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Content will be updated dynamically based on dropdown selection -->
+      </tbody>
+    </table>
+
+  </div>
+
+  <footer class="exam-footer">
+    <p>© 2024 BNCET | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Exam data for different sessions
+    const examData = {
+      session1: [
+        { date: '01-12-2024', day: 'Monday', subject: 'Algorithms', time: '10:00 AM - 1:00 PM' },
+        { date: '01-12-2024', day: 'Monday', subject: 'Data Structures', time: '2:00 PM - 5:00 PM' },
+        { date: '02-12-2024', day: 'Tuesday', subject: 'Operating Systems', time: '10:00 AM - 1:00 PM' },
+        { date: '02-12-2024', day: 'Tuesday', subject: 'DBMS', time: '2:00 PM - 5:00 PM' },
+        { date: '03-12-2024', day: 'Wednesday', subject: 'Digital Logic', time: '10:00 AM - 1:00 PM' },
+        { date: '03-12-2024', day: 'Wednesday', subject: 'COA', time: '2:00 PM - 5:00 PM' }
+      ],
+      session2: [
+        { date: '04-12-2024', day: 'Thursday', subject: 'Algorithms', time: '10:00 AM - 1:00 PM' },
+        { date: '04-12-2024', day: 'Thursday', subject: 'Data Structures', time: '2:00 PM - 5:00 PM' },
+        { date: '05-12-2024', day: 'Friday', subject: 'Operating Systems', time: '10:00 AM - 1:00 PM' },
+        { date: '05-12-2024', day: 'Friday', subject: 'DBMS', time: '2:00 PM - 5:00 PM' },
+        { date: '06-12-2024', day: 'Saturday', subject: 'Digital Logic', time: '10:00 AM - 1:00 PM' },
+        { date: '06-12-2024', day: 'Saturday', subject: 'COA', time: '2:00 PM - 5:00 PM' }
+      ],
+      mock: [
+        // Mock Exam - 1 paper per day
+        { date: '07-12-2024', day: 'Sunday', subject: 'Algorithms', time: '10:00 AM - 1:00 PM' },
+        { date: '08-12-2024', day: 'Monday', subject: 'Data Structures', time: '10:00 AM - 1:00 PM' },
+        { date: '09-12-2024', day: 'Tuesday', subject: 'Operating Systems', time: '10:00 AM - 1:00 PM' },
+        { date: '10-12-2024', day: 'Wednesday', subject: 'DBMS', time: '10:00 AM - 1:00 PM' },
+        { date: '11-12-2024', day: 'Thursday', subject: 'Digital Logic', time: '10:00 AM - 1:00 PM' },
+        { date: '12-12-2024', day: 'Friday', subject: 'COA', time: '10:00 AM - 1:00 PM' }
+      ]
+    };
+
+    // Function to update the schedule based on selected session
+    function updateSchedule() {
+      const session = document.getElementById('session-select').value;
+      const scheduleTable = document.getElementById('exam-schedule').getElementsByTagName('tbody')[0];
+      
+      // Clear existing schedule
+      scheduleTable.innerHTML = '';
+
+      // Only update if a valid session is selected
+      if (session) {
+        let serialNumber = 1;
+
+        // Populate new schedule based on selection
+        examData[session].forEach(exam => {
+          const row = scheduleTable.insertRow();
+          const serialCell = row.insertCell(0);
+          const dayCell = row.insertCell(1);
+          const timeCell = row.insertCell(2);
+          const subjectCell = row.insertCell(3);
+
+          // Show S.No. for all exams including mock exams
+          serialCell.textContent = serialNumber++;
+
+          dayCell.textContent = `${exam.date} / ${exam.day}`;
+          timeCell.textContent = exam.time;
+          subjectCell.textContent = exam.subject;
+        });
+      } else {
+        // Display a message if no selection is made
+        const row = scheduleTable.insertRow();
+        const messageCell = row.insertCell(0);
+        messageCell.colSpan = 4;
+        messageCell.textContent = 'Please select an exam session to view the schedule.';
+      }
+    }
+  </script>
+
+</body>
+</html>
